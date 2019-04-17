@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
 import './App.css';
+import settings from './properties/settings.json';
 
 class OrderTable extends Component {
 
@@ -9,10 +10,11 @@ class OrderTable extends Component {
         this.state = {
             orders: []
         };
+        this.orders_url = settings.api_url + ':' + settings.api_port + '/orders';  
     }
 
     componentDidMount() {
-        fetch('http://192.168.88.68:8080/orders')
+        fetch(this.orders_url)
         .then(results => {
             return results.json();
         }).then(data => {
