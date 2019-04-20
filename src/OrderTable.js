@@ -8,7 +8,8 @@ class OrderTable extends Component {
     constructor(){
         super();
         this.state = {
-            orders: []
+            orders: [],
+            search: ''
         };
         this.orders_url = settings.api_url + ':' + settings.api_port + '/orders';  
     }
@@ -23,9 +24,22 @@ class OrderTable extends Component {
         })
     }
 
+    updateSearch(event){
+        this.setState({search: event.target.value});
+    }
+
     render() {
+        let filteredOrders = this.state.orders.filter(
+            (item) => { 
+                return item.customerID.indexOf(this.state.search) !== -1;
+            } 
+        );
         return (
         <div className="App">
+            <div id="search-div">
+                <label htmlFor="customer-search">Search customer</label>
+                <input id="customer-search" type="text" value={this.state.search}  onChange={this.updateSearch.bind(this)}/>
+            </div>
             <div className="rTable">
                 <div className="rTableRow">
                     <div className="rTableHead">OrderID</div>
@@ -33,7 +47,7 @@ class OrderTable extends Component {
                     <div className="rTableHead">Order date</div>
                     <div className="rTableHead">Shipping date</div>
                 </div>
-                {this.state.orders.map(function(item, key) {             
+                {filteredOrders.map(function(item, key) {             
                     return (
                         <div className="rTableRow" key = {key}>
                             <div className="rTableCell">{item.orderID}</div>
@@ -41,7 +55,9 @@ class OrderTable extends Component {
                             <div className="rTableCell">
                                 <Moment format="YYYY-MM-DD">{item.orderDate}</Moment>
                             </div>
-                            <div className="rTableCell">{item.shippedDate}</div>
+                            <div className="rTableCell">
+                                <Moment format="YYYY-MM-DD">{item.shippedDate}</Moment>
+                            </div>
                         </div>
                     )})}
             </div>
