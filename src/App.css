@@ -39,7 +39,6 @@
 
 .rTable {
   display: table;
-  width: 100%;
 }
 .rTableRow {
   display: table-row;
@@ -73,4 +72,13 @@
 
 #search-div > label {
   margin-right: 10px;
+}
+
+.clickable {
+  text-decoration: underline;
+}
+
+.clickable:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
