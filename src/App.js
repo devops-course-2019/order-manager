@@ -83,7 +83,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1>
-            Order history for Company.com
+            All order
           </h1>
           <div id="search-div">
           <label htmlFor="customer-search">Search customer</label>
